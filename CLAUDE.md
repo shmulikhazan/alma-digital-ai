@@ -31,8 +31,7 @@
 
 - כל קוד **Python** ירוץ עם `python3`
 - כל דוח **HTML** יהיה בעברית (`dir="rtl"`, `lang="he"`)
-- קבצי דוחות → תיקייה `meta-reports/`
-- דוחות HTML יכללו: כותרת, KPI cards, טבלה, המלצה
+- כל `ACCESS_TOKEN` יוגדר כמשתנה בראש הקובץ ולא יועלה ל-GitHub
 
 ---
 
@@ -40,16 +39,29 @@
 
 ```
 alma-digital-ai/
-├── CLAUDE.md           ← קובץ הקשר זה
-├── meta_report.py      ← שליפת נתוני Meta API
-├── report.html         ← דוח ביצועים שבועי (מעוצב)
-└── landing.html        ← דף נחיתה PassportCard
+├── CLAUDE.md                        ← קובץ הקשר זה
+├── .gitignore
+│
+├── clients/                         ← תיקיית לקוחות
+│   └── michal-bar/                  ← מיכל בר | PassportCard
+│       ├── notes.md                 ← פרטי לקוח, טון, CTA
+│       ├── landing.html             ← דף נחיתה
+│       └── report.html              ← דוח ביצועים שבועי
+│
+├── scripts/                         ← סקריפטים ואוטומציות
+│   └── meta_report.py               ← שליפת נתוני Meta API
+│
+└── templates/                       ← תבניות לשימוש עתידי
 ```
 
 ---
 
-## הערות נוספות
+## הוספת לקוח חדש
 
-- שפת ברירת המחדל לתקשורת: **עברית**
-- ממשקים גרפיים: עיצוב מינימליסטי פרמיום, כהה / גלאסמורפיזם
-- כל `ACCESS_TOKEN` יוגדר כמשתנה בראש הקובץ ולא יועלה ל-GitHub
+```
+clients/
+└── <client-slug>/
+    ├── notes.md       ← פרטים, טון, CTA, Ad Account
+    ├── landing.html   ← דף נחיתה
+    └── report.html    ← דוח ביצועים
+```
