@@ -122,25 +122,61 @@
       padding: 10px 18px; border-radius: 10px;
       margin-bottom: 32px; width: fit-content;
     }
-    .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
-    .btn-primary {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: var(--gold); color: var(--navy);
-      font-family: 'Rubik', sans-serif; font-size: 16px; font-weight: 800;
-      padding: 15px 32px; border: none; border-radius: 12px; cursor: pointer;
-      text-decoration: none; box-shadow: 0 4px 22px rgba(200,146,42,0.45);
+    /* Hero form */
+    .hero-form {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 16px;
+      padding: 22px;
+      max-width: 460px;
+      backdrop-filter: blur(8px);
+    }
+    .hero-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+    .hero-form input, .hero-form select {
+      width: 100%;
+      background: rgba(255,255,255,0.95);
+      border: 1.5px solid transparent;
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-family: 'Rubik', sans-serif;
+      font-size: 14px;
+      color: var(--navy);
+      outline: none;
+      direction: rtl;
+      appearance: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .hero-form input::placeholder { color: var(--gray-light); }
+    .hero-form input:focus, .hero-form select:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(200,146,42,0.25);
+    }
+    .hero-form select {
+      margin-bottom: 14px;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23002A4A'><path d='M7 10l5 5 5-5z'/></svg>");
+      background-repeat: no-repeat;
+      background-position: left 12px center;
+      padding-left: 36px;
+    }
+    .btn-hero-submit {
+      width: 100%;
+      background: var(--gold);
+      color: var(--navy);
+      font-family: 'Rubik', sans-serif;
+      font-size: 16px;
+      font-weight: 800;
+      padding: 14px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      box-shadow: 0 4px 22px rgba(200,146,42,0.45);
       transition: all 0.25s;
     }
-    .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 32px rgba(200,146,42,0.55); }
-    .btn-secondary {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: transparent; color: rgba(255,255,255,0.75);
-      font-family: 'Rubik', sans-serif; font-size: 15px; font-weight: 600;
-      padding: 15px 24px; border: 1px solid rgba(255,255,255,0.22);
-      border-radius: 12px; cursor: pointer; text-decoration: none;
-      transition: all 0.25s;
-    }
-    .btn-secondary:hover { border-color: var(--gold); color: var(--gold-light); }
+    .btn-hero-submit:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 32px rgba(200,146,42,0.55); }
+    .hero-form-success { display: none; text-align: center; color: var(--white); padding: 14px 4px; }
+    .hero-form-success .check { font-size: 38px; margin-bottom: 8px; }
+    .hero-form-success h3 { font-size: 18px; font-weight: 800; margin-bottom: 6px; color: var(--white); }
+    .hero-form-success p { font-size: 13px; color: rgba(255,255,255,0.75); }
 
     /* Hero card */
     .hero-card {
@@ -321,6 +357,8 @@
       .pain-grid { grid-template-columns: 1fr; }
       .compare-grid { grid-template-columns: 1fr; }
       .form-grid-2 { grid-template-columns: 1fr; }
+      .hero-form-row { grid-template-columns: 1fr; }
+      .hero-form { max-width: 100%; }
       .danger-box { flex-direction: column; gap: 12px; padding: 28px 24px; }
     }
     @media(max-width: 560px) {
@@ -356,9 +394,23 @@
         <strong>אני מאחד את כל ההלוואות למשכנתא בנקאית אחת, ומוריד את ההחזר החודשי בעשרות אחוזים.</strong>
       </p>
       <div class="hero-promise">✅ ללא ריביות חוץ-בנקאיות · ללא תשלום ראשוני · 90% הצלחה</div>
-      <div class="hero-btns">
-        <a href="#form" class="btn-primary">📞 שיחת בדיקה ללא עלות</a>
-        <a href="#numbers" class="btn-secondary">ראו מספרים אמיתיים ←</a>
+      <form id="heroForm" class="hero-form">
+        <div class="hero-form-row">
+          <input type="text" name="name" placeholder="שם מלא" required />
+          <input type="tel" name="phone" placeholder="טלפון" required />
+        </div>
+        <select name="topic" required>
+          <option value="" disabled selected>על מה תרצה לדבר?</option>
+          <option value="loan-consolidation">איחוד הלוואות</option>
+          <option value="mortgage">משכנתא</option>
+          <option value="other">אחר</option>
+        </select>
+        <button type="submit" class="btn-hero-submit" id="heroSubmitBtn">קבל שיחת בדיקה חינם</button>
+      </form>
+      <div class="hero-form-success" id="heroSuccess">
+        <div class="check">✅</div>
+        <h3>קיבלתי! אחזור אליכם בהקדם</h3>
+        <p>נעם יחזור אליכם לשיחת בדיקה ראשונית ללא התחייבות.</p>
       </div>
     </div>
 
@@ -608,6 +660,17 @@
     setTimeout(() => {
       document.getElementById('leadForm').style.display = 'none';
       document.getElementById('successMsg').style.display = 'block';
+    }, 1100);
+  });
+
+  document.getElementById('heroForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const btn = document.getElementById('heroSubmitBtn');
+    btn.textContent = '⏳ שולח...';
+    btn.disabled = true;
+    setTimeout(() => {
+      document.getElementById('heroForm').style.display = 'none';
+      document.getElementById('heroSuccess').style.display = 'block';
     }, 1100);
   });
 
