@@ -1,0 +1,11 @@
+# Secrets & tokens — לעולם לא להעלות לGitHub
+*.env
+.env*
+secrets.py
+tokens.py
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.DS_Store
